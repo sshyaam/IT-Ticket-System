@@ -16,9 +16,29 @@ public class TicketService {
         return tickets;
     }
 
+    public ticket getTicketById(Long id) {
+        for (ticket t: tickets) {
+            if (t.getId().equals(id)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
     public ticket createTicket(ticket newTicket) {
         newTicket.setId(nextId++);
         tickets.add(newTicket);
         return newTicket;
+    }
+
+    public ticket updateTicketStatus(Long id, String newStatus) {
+        for (ticket t: tickets) {
+            System.out.println(t.getId() + " " + id);
+            if (t.getId() == id) {
+                t.setStatus(newStatus);
+                return t;
+            }
+        }
+        return null;
     }
 }
