@@ -41,4 +41,14 @@ public class TicketService {
         }
         return null;
     }
+
+    public boolean deleteTicketService(Long id) {
+        for (ticket t: tickets) {
+            if (t.getId() == id) {
+                tickets.remove(t);
+                return true;
+            }
+        }
+        return false;
+    }
 }

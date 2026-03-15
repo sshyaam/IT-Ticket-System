@@ -3,6 +3,7 @@ package com.example.ticketing.controller;
 import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +65,15 @@ public class TicketController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok("Ticket Updated: \nID: " + updatedTicket.getId() + ", Title: " + updatedTicket.getTitle() + ", Description: " + updatedTicket.getDescription() + ", Status: " + updatedTicket.getStatus() + ", Priority: " + updatedTicket.getPriority());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTicket(@PathVariable Long id) {
+        boolean status = ts.deleteTicketService(id);
+        if (!status) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok("Ticket with ID: " + id + " deleted.");
     }
     
 }
